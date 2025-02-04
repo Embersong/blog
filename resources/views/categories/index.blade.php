@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Посты')
+@section('title', 'Категории')
 
 @section('menu')
     @include('parts.menu')
@@ -12,14 +12,13 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                @forelse ($posts as $post)
+                @forelse ($categories as $category)
 
-                    <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a><br>
+                    <a href="{{ route('posts.categories.show', $category) }}">{{ $category->name }}</a><br>
                 @empty
-                    <p>Нет постов</p>
+                    <p>Нет категорий</p>
                 @endforelse
 
-                {{ $posts->links() }}
 
             </div>
         </div>

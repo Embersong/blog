@@ -12,14 +12,15 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                @forelse ($posts as $post)
 
-                    <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a><br>
+                <h2>Посты категории {{ $category->name }}</h2>
+                @forelse ($category->posts as $post)
+
+                    <a href="{{ route('posts.show', $post) }}">{{ $category->name }} {{ $post->title }}</a><br>
                 @empty
                     <p>Нет постов</p>
                 @endforelse
 
-                {{ $posts->links() }}
 
             </div>
         </div>

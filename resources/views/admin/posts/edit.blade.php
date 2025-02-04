@@ -15,12 +15,12 @@
                 @include('parts.messages')
 
                 <div class="card">
-                    <div class="card-header">Добавить пост</div>
+                    <div class="card-header">Изменить пост</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.posts.store') }}">
+                        <form method="POST" action="{{ route('admin.posts.update', $post) }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Категория</label>
 
@@ -28,7 +28,7 @@
 
                                     <select class="form-select" name="category_id" id="category_id">
                                         @foreach ($categories as $category)
-                                            <option @if ($category->id == old('category_id')) selected @endif value="{{ $category->id }}" >
+<option {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }} value="{{ $category->id }}" >
                                                 {{ $category->name }}</option>
                                         @endforeach
                                     </select>
@@ -48,7 +48,7 @@
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           autofocus value="{{ old('title') }}">
+                                           autofocus value="{{ old('title') ?? $post->title }}">
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
 
                                 <div class="col-md-6">
                                     <textarea class="form-control @error('text') is-invalid @enderror"
-                                              name="text">{{ old('text') }}</textarea>
+                                              name="text">{{ old('text') ?? $post->text }}</textarea>
                                     @error('text')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Добавить
+                                        Изменить
                                     </button>
                                 </div>
                             </div>
