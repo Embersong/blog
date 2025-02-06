@@ -24,9 +24,10 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->where('post', '[0-
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/categories/', [CategoryController::class, 'index'])->name('posts.categories.index');
 Route::get('/posts/categories/{category}', [CategoryController::class, 'show'])->name('posts.categories.show');
-
+Route::post('/posts/{id}/add/like', [PostController::class, 'addLike'])->name('posts.like.add');
 
 Route::name('admin.')
+    ->middleware(['auth', 'is_admin'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminIndexController::class, 'index'])->name('index');

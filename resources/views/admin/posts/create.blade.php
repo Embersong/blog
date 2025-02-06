@@ -18,7 +18,7 @@
                     <div class="card-header">Добавить пост</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.posts.store') }}">
+                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.posts.store') }}">
                             @csrf
 
                             <div class="row mb-3">
@@ -71,6 +71,19 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <label for="image" class="form-label">Изображение</label>
+
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" id="image" name="image">
+
+                                </div>
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

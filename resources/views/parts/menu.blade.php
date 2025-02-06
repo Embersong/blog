@@ -5,9 +5,12 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('posts.categories.index') }}">Категории</a>
     </li>
-    @auth()
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.index') }}">Админка</a>
-        </li>
-    @endauth
+    @guest
+    @else
+        @if (Auth::user()->is_admin)
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.index') }}">Админка</a>
+            </li>
+        @endif
+    @endguest
 </ul>

@@ -14,7 +14,7 @@
 
                 @forelse ($posts as $post)
 
-                    <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a><br>
+                    <a href="{{ route('posts.show', $post) }}">{{ $post->title }} : {{ $post->likes }}</a><br>
                 @empty
                     <p>Нет постов</p>
                 @endforelse
