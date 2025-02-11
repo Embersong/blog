@@ -6,6 +6,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,25 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/vkontakte/redirect', function () {
+    return Socialite::driver('vkontakte')->redirect();
+});
+
+Route::get('/vkontakte/callback', function () {
+    $socialUser = Socialite::driver('vkontakte')->user();
+    $user = User::query()->where('email', $socialUser->getEmail())->first();
+    if(!$user) {
+        $user = User::query()->create([
+            'email' => $socialUser->getEmail(),
+            'name' => $socialUser->getName(),
+            'password' => 'password'
+        ]);
+    }
+    Auth::login($user);
+    return redirect('/');
+});
+
 
 Route::view('/', 'index')->name('home');
 

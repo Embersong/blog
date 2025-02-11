@@ -50,6 +50,8 @@
                                 </div>
                             </div>
                         </div>
+                        <a href="/vkontakte/redirect"> <img src="vk.png" width="50" alt=""></a>
+
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
