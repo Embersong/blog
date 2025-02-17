@@ -46,6 +46,7 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/categories/', [CategoryController::class, 'index'])->name('posts.categories.index');
 Route::get('/posts/categories/{category}', [CategoryController::class, 'show'])->name('posts.categories.show');
 Route::post('/posts/{id}/add/like', [PostController::class, 'addLike'])->name('posts.like.add');
+Route::post('/posts/search', [PostController::class, 'search'])->name('posts.search');
 
 Route::name('admin.')
     ->middleware(['auth', 'is_admin'])

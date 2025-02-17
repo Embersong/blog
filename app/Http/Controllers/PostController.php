@@ -8,6 +8,30 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+/*        $posts = Post::query()
+            ->where('title', 'LIKE', "%{$query}%")
+            ->orWhere('text', 'LIKE', "%{$query}%")
+            ->paginate(15);*/
+
+/*        $postsTitle = Post::query()->title($query);
+        $postsText = Post::query()->text($query);
+
+        $posts = $postsTitle->union($postsText)->paginate(10);*/
+
+        $posts = Post::query()->titleAndText($query)->paginate(10);
+
+        session()->flash('success', 'Результаты поиска строки "' . $query . '"');//XSS?
+
+        return view('posts.index', [
+            'posts' => $posts,
+        ]);
+
+    }
+
     public function addLike(string $id)
     {
         $post = Post::find($id);

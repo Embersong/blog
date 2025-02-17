@@ -32,6 +32,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 @yield('menu')
+                <form action="{{ route('posts.search') }}" method="POST">
+                    @csrf
+                    <input type="text" name="query" placeholder="Поиск поста...">
+                    <button type="submit" class="btn btn-primary">
+                        Поиск
+                    </button>
+                </form>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
