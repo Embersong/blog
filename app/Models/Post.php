@@ -10,6 +10,11 @@ class Post extends Model
 
     protected $fillable = ['title', 'text', 'category_id', 'image'];
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
